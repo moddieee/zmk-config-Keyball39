@@ -259,7 +259,7 @@
             bindings = <
 &kp LG(N7)        &trans  &kp LG(N8)        &kp LG(N9)        &kp LS(LG(S))          &trans  &bt BT_CLR  &bt BT_NXT       &bt BT_PRV                         &trans           
 &kp LG(NUMBER_4)  &trans  &kp LG(N5)        &kp LG(NUMBER_6)  &kp LG(N0)             &trans  &trans      &kp CAPSLOCK     &trans                             &trans           
-&kp LG(NUMBER_1)  &trans  &kp LG(NUMBER_2)  &kp LG(NUMBER_3)  &kp LA(TAB)            &rgb_ug RGB_TOG     &rgb_ug RGB_EFF  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD   &trans
+&kp LG(NUMBER_1)  &trans  &kp LG(NUMBER_2)  &kp LG(NUMBER_3)  &kp LA(TAB)            &trans  &trans      &trans           &trans                             &trans
 &trans  &trans   &trans   &trans   &sk LEFT_GUI  &trans  &trans  &trans                       &trans
             >;
         };
