@@ -259,8 +259,8 @@ layers:
   - {t: '$$mdi:transfer$$', type: trans}
   - $$mdi:mouse-left-click-outline$$
   - {t: '$$mdi:transfer$$', type: trans}
-  - Alt+Ctl+$$mdi:keyboard-tab$$
   - {t: '$$mdi:mouse-right-click-outline$$', h: '$$mdi:mouse-scroll-wheel$$'}
+  - Alt+Ctl+$$mdi:keyboard-tab$$
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
