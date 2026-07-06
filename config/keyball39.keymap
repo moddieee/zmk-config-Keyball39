@@ -267,9 +267,9 @@
         rightmouse_layer {
             label = "RMSE";
             bindings = <
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans       &trans  &mo 7   &trans
-&trans  &trans  &trans  &trans  &trans                  &trans  &mkp LCLK    &trans  &trans  &Mouse2HT MCLK RCLK
-&trans  &trans  &trans  &trans  &trans                  &trans  &trans       &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans                  &trans        &trans             &trans  &mo 7   &trans
+&trans  &trans  &trans  &trans  &trans                  &trans        &mkp LCLK          &trans  &trans  &Mouse2HT MCLK RCLK
+&trans  &trans  &trans  &trans  &trans                  &kp LA(RIGHT) &kp LA(LEFT)       &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans                          &trans
             >;
         };
