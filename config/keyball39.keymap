@@ -212,7 +212,7 @@
             bindings = <
 &kp Q          &lt 5 W       &lt 7 F            &kp P             &kp B                                    &kp J    &kp L           &lt 6 U             &lt 7 Y        &ht LC(BACKSPACE) BACKSPACE
 &kp A          &kp R         &lt 2 S            &lt 4 T           &kp G                                    &kp M    &lt 4 N         &lt 2 E             &kp I          &kp O
-&kp Z          &lt 5 X       &ht LEFT_ALT C     &ht LEFT_GUI D    &kp V                                    &kp N    &ht LEFT_GUI H  &ht LEFT_ALT COMMA  &kp PERIOD     &kp SLASH
+&kp Z          &lt 5 X       &ht LEFT_ALT C     &ht LEFT_GUI D    &kp V                                    &kp K    &ht LEFT_GUI H  &ht LEFT_ALT COMMA  &kp PERIOD     &kp SLASH
 &mlt 7 MCLK    &mlt 8 RCLK   &mkp LCLK  &ht LC(LA(ENTER)) LA(LC(TAB))  &ht LA(LC(LEFT_SHIFT)) SPACE  &mt LCTRL ENTER         &quickSK LSHFT  &lt 3 TAB &mo 7
             >;
         };
