@@ -11,10 +11,13 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &lt {
     tapping-term-ms = <240>;
-    flavor = "balanced";
+    flavor = "tap-preferred";
     quick-tap-ms = <150>;
 };
 
@@ -22,6 +25,22 @@
     tapping-term-ms = <200>;
     flavor = "tap-preferred";
     quick-tap-ms = <150>;
+};
+
+&mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
+
+&msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
+
+&msc {
+    acceleration-exponent = <1>;      // 0
+    time-to-max-speed-ms = <100>;       // 300
+    delay-ms = <0>;                   // 0
+};
+
+&mmv {
+    time-to-max-speed-ms = <500>;
+    acceleration-exponent = <1>;
+    trigger-period-ms = <16>;
 };
 
 &caps_word { continue-list = <UNDERSCORE MINUS>; };
@@ -46,6 +65,151 @@
             bindings = <&kp DOT>, <&kp SEMI>;
 
             mods = <(MOD_LSFT|MOD_RSFT)>;
+        td0: td0 {
+            compatible = "zmk,behavior-tap-dance";
+            display-name = "Shift/Caps Lock Tap Dance";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_SHIFT>, <&kp CAPS>;
+        };
+
+        td_comma: td_comma {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_COMMA";
+            #binding-cells = <0>;
+            bindings = <&ht LEFT_ALT COMMA>, <&kp MINUS>;
+
+            tapping-term-ms = <220>;
+        };
+
+        ht: ht {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <220>;
+        };
+
+        LongHT: LongHT {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LONGHT";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+        };
+
+        MouseHT: MouseHT {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSEHT";
+            bindings = <&kp>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        quickSK: quickSK {
+            compatible = "zmk,behavior-sticky-key";
+            label = "QUICKSK";
+            bindings = <&kp>;
+            #binding-cells = <1>;
+            quick-release;
+            release-after-ms = <1000>;
+        };
+
+        Mouse2HT: Mouse2HT {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE2HT";
+            bindings = <&mkp>, <&mkp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+        
+        mlt: mouse_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOUSE_LAYER_TAP";
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&mkp>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        Back {
+            bindings = <&kp LA(LEFT)>;
+            key-positions = <2 15>;
+        };
+
+        Forward {
+            bindings = <&kp LA(RIGHT)>;
+            key-positions = <15 30>;
+        };
+
+        Del1 {
+            bindings = <&kp DELETE>;
+            key-positions = <7 8>;
+        };
+
+        Del2 {
+            bindings = <&kp DELETE>;
+            key-positions = <4 5>;
+        };
+
+        AltTab {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <4 18>;
+        };
+
+        Mouse1 {
+            bindings = <&mkp MB1>;
+            key-positions = <26 40>;
+        };
+
+        Mouse2 {
+            bindings = <&mkp MB2>;
+            key-positions = <11 26>;
+        };
+
+        Mouse3 {
+            bindings = <&mkp MB3>;
+            key-positions = <40 39>;
+        };
+
+        SemiColon {
+            bindings = <&kp SEMICOLON>;
+            key-positions = <8 9>;
+        };
+
+        Colon {
+            bindings = <&kp COLON>;
+            key-positions = <9 10>;
+        };
+
+        Enter {
+            bindings = <&kp ENTER>;
+            key-positions = <18 33>;
+        };
+
+        QBALCMLinks {
+            bindings = <&ALCMLinks>;
+            key-positions = <1 5>;
+        };
+
+        Dash {
+            bindings = <&kp MINUS>;
+            key-positions = <38 39>;
+        };
+
+        AltTab2 {
+            bindings = <&kp LA(LC(TAB))>;
+            key-positions = <33 32>;
         };
     };
 
@@ -62,22 +226,22 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            label = "QWRT";
+            label = "CLMK";
             bindings = <
-&kp Q      &kp W         &kp E     &kp R         &kp T                                    &kp Y            &kp U  &kp I      &kp O    &kp P
-&kp A      &kp S         &kp D     &kp F         &kp G                                    &kp H            &kp J  &kp K      &kp L    &kp SEMI
-&kp Z      &kp X         &kp C     &kp V         &kp B                                    &kp N            &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL  &kp LEFT_WIN  &kp LALT  &lt 6 ESCAPE  &lt 4 SPACE  &lt 5 LA(GRAVE)  &kp ENTER  &lt 2 BACKSPACE                             &kp RSHFT
+&kp Q          &lt 5 W       &lt 7 F            &kp P             &kp B                                    &kp J    &kp L           &lt 6 U             &lt 7 Y        &ht LC(BACKSPACE) BACKSPACE
+&kp A          &kp R         &lt 2 S            &lt 4 T           &kp G                                    &kp M    &lt 4 N         &lt 2 E             &kp I          &kp O
+&kp Z          &lt 5 X       &ht LEFT_ALT C     &ht LEFT_GUI D    &kp V                                    &kp N    &ht LEFT_GUI H  &ht LEFT_ALT COMMA  &kp PERIOD     &kp SLASH
+&mlt 7 MCLK    &mlt 8 RCLK   &mkp LCLK  &ht LC(LA(ENTER)) LA(LC(TAB))  &ht LA(LC(LEFT_SHIFT)) SPACE  &mt LCTRL ENTER         &quickSK LSHFT  &lt 3 TAB &mo 7
             >;
         };
 
-        number_layer {
-            label = "NUM";
+        qwerty_layer {
+            label = "QWTY";
             bindings = <
-&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                  &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0
-&kp LEFT      &kp DOWN      &kp UP_ARROW  &kp RIGHT     &none                         &none         &none         &none         &none         &none
-&none         &none         &none         &none         &none                         &none         &none         &trans        &trans        &none
-&trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans                                                  &trans
+&kp Q          &lt 5 W       &lt 7 E            &kp R             &kp T                                    &kp Y    &kp U           &lt 6 I             &lt 7 O        &ht LC(BACKSPACE) BACKSPACE
+&kp A          &kp S         &lt 2 D            &lt 4 F           &kp G                                    &kp H    &lt 4 J         &lt 2 K             &kp L          &kp P
+&kp Z          &lt 5 X       &ht LEFT_ALT C     &ht LEFT_GUI V    &kp B                                    &kp N    &ht LEFT_GUI M  &ht LEFT_ALT COMMA  &kp PERIOD     &kp SLASH
+&mlt 7 MCLK    &mlt 8 RCLK   &mkp LCLK  &ht LC(LA(ENTER)) LA(LC(TAB))  &ht LA(LC(LEFT_SHIFT)) SPACE  &mt LCTRL ENTER         &quickSK LSHFT  &lt 3 TAB &mo 7
             >;
         };
 
@@ -91,6 +255,26 @@
             >;
         };
 
+        nav_layer {
+            label = "NAV";
+            bindings = <
+&LongHT LA(F4) ESC        &msc SCRL_UP        &mmv MOVE_UP            &msc SCRL_DOWN              &msc SCRL_LEFT                               &kp HOME              &kp PAGE_UP  &kp UP_ARROW  &kp PAGE_DOWN  &trans
+&mt LA(LC(TAB)) TAB       &mmv MOVE_LEFT      &mmv MOVE_DOWN          &mmv MOVE_RIGHT             &msc SCRL_RIGHT                              &kp END               &kp LEFT     &kp DOWN      &kp RIGHT      &ht LC(LS(NUMBER_3)) ENTER
+&MouseHT LEFT_SHIFT MCLK  &MouseHT LWIN RCLK  &ht LEFT_ALT LC(LA(V))  &mkp LCLK                   &LongHT LC(LA(DELETE)) DELETE                &Mouse2HT MCLK RCLK   &mkp LCLK    &to 0         &to 1          &mo 7                       
+&trans           &trans          &trans        &trans     &ht LC(LS(NUMBER_3)) SPACE  &trans  &trans  &trans                                        &trans
+            >;
+        };
+
+        number_layer {
+            label = "NUM";
+            bindings = <
+&kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5                  &kp NUMBER_6  &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0
+&kp LEFT      &kp DOWN      &kp UP_ARROW  &kp RIGHT     &none                         &none         &none         &none         &none         &none
+&none         &none         &none         &none         &none                         &none         &none         &trans        &trans        &none
+&trans        &trans        &trans        &trans        &trans        &trans  &trans  &trans                                                  &trans
+            >;
+        };
+
         function_layer {
             label = "FUN";
             bindings = <
@@ -98,16 +282,6 @@
 &kp F5  &kp F6   &kp F7   &kp F8   &none                   &none   &none  &none  &none  &none
 &kp F9  &kp F10  &kp F11  &kp F12  &none                   &none   &none  &none  &none  &none
 &trans  &trans   &trans   &trans   &trans  &trans  &trans  &trans                       &trans
-            >;
-        };
-
-        mouse_layer {
-            label = "MOUSE";
-            bindings = <
-&kp N1          &kp N2          &kp N3        &kp N4     &kp N5                  &kp N6         &kp N7     &kp N8  &kp N9     &kp N0
-&kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &none                   &kp PAGE_UP    &mkp LCLK  &none   &mkp RCLK  &mkp MCLK
-&none           &none           &none         &none      &none                   &kp PAGE_DOWN  &none      &none   &none      &none
-&none           &trans          &trans        &trans     &trans  &trans  &trans  &mo 3                                        &none
             >;
         };
 
